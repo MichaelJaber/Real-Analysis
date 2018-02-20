@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+One of the exercises at the end of Section 2.6 in Abbot requests that students prove the equivalence of the Axiom of Completeness, the Nested Interval Property, the Monotone Convergence Theorem, the Bolzano-Weierestrass Theorem, and Cauchy Criterion for convergent series. I will provide my attempt at these here. \\  
+
+(a) Let S be a set of real numbers bounded above by some M $>$ 0 such that $\mid$s$\mid$ $\leq$ M for all s $\in$ S. We will use the Nested Interval Property to find a real number that is guaranteed to be the least upper bound, or supremum, of S. Let $I_1$ = [$s_1$, $M_1$], where s $\in$ S. Let $x_1$ = ($s_1$+$M_1$)/2. Let $I_2$ = [$s_1$, $x_1$] if $x_1$ is an upper bound on S. Otherwise, let $I_2$ = [$x_1$, $M_1$]. In general, let $I_n$ = [$s_{n-1}$, $x_{n-1}$] if $x_{n-1}$ was an upper bound on S, or [$x_{n-1}$, $M_{n-1}$] if otherwise. Notice that 
+
+\begin{equation}
+    I_1 \supseteq I_2 \supseteq I_3 \supseteq \ldots
+\end{equation}
+
+By the Nested Interval Property, 
+
+\begin{equation}
+    \bigcap^\infty_{n=0} I_n \neq \emptyset
+\end{equation}
+
+We now know that there is some element y that is contained in every $I_n$. We know that y is an upper bound on S, since by our construction, every $I_n$ contains an upper bound on S. We can also assert that y is least upper bound. Assume for the sake of contradiction that y is not a least upper bound. Surely, since the right-hand endpoint of our interval is growing smaller and smaller, there must exist some $I_N$ whose right-hand endpoint is less that y. This contradicts our statement that y is contained in every $I_n$, thus y is a least upper bound on S. \\
+
+(b) We will now use the Monotone Convergence Theorem to prove the Nested Interval Property. Let ($a_n$) be a bounded monotone increasing sequence, and ($b_n$) a bounded monotone decreasing sequence. In addition, we will assume these two sequences converge to the same limit L. The sequences ($a_n$) and ($b_n$) are bounded above and below respectively by some M. Construct nested intervals so that $I_n$ = [$a_n$, $b_n$]. We must now argue that there exists some element, which we claim to be L, that is contained in every nested interval $I_n$.
+
+\begin{equation}
+    L \in \bigcap^\infty_{n=0} I_n 
+\end{equation}
+
+Let us validate that L is in this set by looking at the sequences of the left and right-hand endpoints of the intervals. Since ($a_n$) is monotone increasing, it must be true that L $\geq a_n$ for all n $\in \mathbb{N}$. Similarly, L $\leq b_n$ for all n $\in \mathbb{N}$. By our construction of $I_n$, since $a_n \leq L \leq b_n$, L must be contained in every interval. Thus, the intersection of these nested intervals is nonempty, and the Nested Interval Property is proven. \\
+
+(c) We will now use the Bolzano-Weierstrass Theorem to prove the Nested Interval Property. Let ($a_n$) be a sequence bounded by some M $>$ 0. Just as in our proof of the Bolzano-Weirestrass Theorem, start with the interval $I_1$ = [-M, M]. At each iteration, bisect the interval and choose the interval that has an infinite amount of terms from the sequence. In general, $I_{n+1}$ contains an infinite amount of terms from the sequence, and is the result of bisecting $I_n$. Note that 
+
+\begin{equation}
+    I_1 \supseteq I_2 \supseteq I_3 \supseteq \ldots
+\end{equation}
+
+In addition, by the Bolzano-Weierestrass Theorem, we can take one term from each of our nested intervals to produce a convergent subsequence ($a_{n_k}$). This only holds if each $n_k < n_{k+1}$. In other words, the order in which the terms appear in the subsequence must be the same as in the original sequence. Let $\lim_{x \to \infty} a_{n_k}$ = x. Now, let us look at ${\bigcap}_{n=1}^\infty$$I_n$. By our construction, as the length of the interval becomes arbitrarily small, we can argue that x is contained in every $I_n$. This becomes clear when we use the topological definition for convergence. At some point in the sequence, all proceeding terms are contained in an arbitrarily small open interval centered around x. Thus, x is contained in every $I_n$, so the intersection is nonempty, and the Nested Interval Property is proven. \\
+
+(d) Finally, we will prove the Bolzano-Weierstrass Theorem using the Cauchy Criterion. Let ($a_n$) be a sequence bounded by some M $>$ 0. Just as in the proof above, let us bisect the interval [-M, M] into two parts, [-M, 0] and [0, M].  Pick one term from the sequence, which we will call $a_{n_1}$. Now, let $I_1$ be the interval that contains an infinite amount of terms from the sequence. Again, bisect $I_1$ and set $I_2$ to be the interval that contains an infinite amount of terms from $a_n$. In addition, pick one term in the sequence that is contained in $I_2$, making sure that $n_1 < n_2$. Continue this process so that we have 
+
+\begin{equation}
+    I_1 \supseteq I_2 \supseteq I_3 \supseteq \ldots
+\end{equation}
+
+and a subsequence $a_{n_k}$. Let us take note of the length of each interval $I_n$. Since we are bisecting the intervals at each step of the way, the length of interval $I_k = M/2^{k-1}$. Set N so that the length of these intervals is less than some $\epsilon > 0$. When we take a look at $I_N$, we can see that the remainder of the points in our subsequence must be taken from this interval. Since the length of $I_N < \epsilon$, this is also characterized by saying that 
+
+\begin{equation}
+    | a_{n_k}-a_{n_j} | < \epsilon
+\end{equation}
+
+where $n_k, n_j \geq N$. By the Cauchy Criterion, this subsequence converges. We have produced a convergent subsequence from our original bounded sequence, thus proving the Bolzano-Weierestrass Theorem. 
+
+
+\end{document}
