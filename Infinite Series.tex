@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+These are my notes on Section 2.7 from Abbott. I will provide proofs to various theorems on infinite series as well as provide my responses to any problems of interest. \\
+
+(a) Prove the alternating series test by showing that $(a_n)$ is a Cauchy sequence. \\
+
+Since we are looking to show the Cauchy Criterion, let us look at the sequence of partial sums. 
+
+\begin{equation}
+    |s_n - s_m| = |a_{m+1} + a_{m+2} + ... + a_n|
+\end{equation}
+
+Since the sign of each term is alternating by our hypothesis, and $(a_n)$ is decreasing, we can assert that 
+
+\begin{equation}
+    |s_n - s_m| = |a_{m+1} + a_{m+2} + ... + a_n| < |a_{m+1}|
+\end{equation}
+
+Since we know that $a_n \rightarrow 0$, for all n $\ge$ N, $|a_n| < \epsilon$. Therefore, for all $n, m \ge N$,
+
+\begin{equation}
+    |s_n - s_m| < \epsilon
+\end{equation}
+
+The sequence of partial sums is Cauchy, thus the series is convergent. \\
+
+(b) Supply another proof using the Nested Interval Property. \\
+
+Construct nested intervals in the following manner: $I_n = [s_n, s_n+1]$. By our hypothesis, we know that these intervals are nested. In addition, since $(a_n) \rightarrow 0$, for all $n \ge N$, the length of every interval $I_n$ is less than some $\epsilon$. By the Nested Interval Property, ${\bigcap}_{n=1}^\infty I_n \neq \emptyset$. Thus, we can propose some x that is contained in every $I_n$ to be the limit point of the series, since every $s_n$ for all $n \ge N$ becomes arbitrarily close to this limit point. \\
+
+(c) Consider the subsequences $(s_{2n})$ and $(s_{2n+1})$ and show how the Monotone Convergence Theorem leads to a third proof. \\
+
+Take note that the partial sums $(s_{2n})$ and $(s_{2n+1})$ end in even and odd values respectively. Without loss of generality, let us assume that $a_n$ > 0. We can then assert that every even term in the series is less than zero, and every odd term is greater than zero. We will now show that the sequence of partial sums $(s_{2n})$ and $(s_{2n+1})$ are monotone increasing and decreasing respectively. Let us take a look at $s_{2n+2} and s_{2n}$. 
+
+\begin{equation}
+    s_{2n+2} - s_{2n} = a_{2n+1} + a_{2n+2} > 0
+\end{equation}
+
+Since $a_{2n+1} > 0$, $(a_n)$ is decreasing, and $a_{2n+2} < 0$, we have shown that the sequence $(s_{2n})$ is monotone increasing. It is very similar to show that $(s_{2n+1})$ is monotone decreasing. In addition, each partial sum $s_{2n}$ is bounded above by $|s_{2n-1}|$. Similarly, $s_{2n+1}$ is bounded below by $s_{2n}$. By the Monotone Convergence Theorem, both sequences converge to limits $L_1$ and $L_2$ respectively. In addition, since $(a_n) \rightarrow 0$, 
+
+\begin{equation}
+    |s_{2n} - s_{2n+1}| < \epsilon / 3
+\end{equation}
+
+If we could show that $(s_{2n})$ and $(s_{2n+1})$ converged to the same limit, we will have shown that the series itself converges. Putting this all together yields 
+
+\begin{equation}
+    |L_1 - L_2| \\
+    = | (L_1 - s_{2n}) + (s_{2n} - s_{2n+1}) + (s_{2n+1} - L_2) | 
+    \leq |L_1 - s_{2n}| + |s_{2n} - s_{2n+1}| + |s_{2n+1} - L_2| 
+    = \epsilon / 3 +  \epsilon / 3 +  \epsilon / 3 = \epsilon 
+    = \epsilon
+\end{equation}
+
+Thus, merging these two subsequences back together shows that the entire series converges. \\
+
+Next, I will attempt to prove some statements about geometric series
+
+\end{document}
