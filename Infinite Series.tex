@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{amsmath}
 
 \begin{document}
 
@@ -48,15 +48,26 @@ Since $a_{2n+1} > 0$, $(a_n)$ is decreasing, and $a_{2n+2} < 0$, we have shown t
 If we could show that $(s_{2n})$ and $(s_{2n+1})$ converged to the same limit, we will have shown that the series itself converges. Putting this all together yields 
 
 \begin{equation}
-    |L_1 - L_2| \\
-    = | (L_1 - s_{2n}) + (s_{2n} - s_{2n+1}) + (s_{2n+1} - L_2) | 
-    \leq |L_1 - s_{2n}| + |s_{2n} - s_{2n+1}| + |s_{2n+1} - L_2| 
-    = \epsilon / 3 +  \epsilon / 3 +  \epsilon / 3 = \epsilon 
-    = \epsilon
+\begin{split}
+    |L_1 - L_2| & = | (L_1 - s_{2n}) + (s_{2n} - s_{2n+1}) + (s_{2n+1} - L_2) | \\ 
+    & \leq |L_1 - s_{2n}| + |s_{2n} - s_{2n+1}| + |s_{2n+1} - L_2| \\
+    & = \epsilon / 3 +  \epsilon / 3 +  \epsilon / 3  \\
+    & = \epsilon
+\end{split}
 \end{equation}
 
-Thus, merging these two subsequences back together shows that the entire series converges. \\
+Let us say that for $(s_{2n})$, all terms are in within $\epsilon$ of $L_1$ for all $n \ge N_1$, and for $(s_{2n+1})$, all terms are within $\epsilon$ of $L_2$ for all $n \ge N_2$. Again, say that $|a_n| < \epsilon$ for all $n \ge N_3$. Setting $N = \max \{\,N_1, N_2, N_3\}\ $satisfies the above equation. Thus, merging these two subsequences back together yields a sequence of partial sums that converge, and the statement is proven. \\
 
-Next, I will attempt to prove some statements about geometric series
+I will now give my attempt to prove a theorem from Section 2.4. \\
 
-\end{document}
+$Theorem: \sum_{n=1}^{\infty} 1/n^p$ converges if and only if $p > 1$. \\
+
+To prove one direction, we will use the contrapositive. Assume $p \ge 1$. We will now show that the sequence $\sum_{n=1}^{\infty} 1/n^p$ diverges. Thankfully, we know that the harmonic series diverges, thus we can use the Comparison Test. Since $p \ge 1$, $ 1/n^p \ge 1/n$ for all $n \in \mathbb{N}$. Thus, by the Comparison Test, $\sum_{n=1}^{\infty} 1/n^p$ diverges. \\
+
+To prove the reverse direction, we must use some facts about geometric series. Assume $p > 1$. Recall the Cauchy Condensation Test. If $\sum_{n=0}^{\infty} 2^n/(2^n)^p$ converges, then $\sum_{n=1}^{\infty} 1/n^p$ converges as well. With some simplification, the series becomes
+
+\begin{equation}
+    \sum_{n=0}^{\infty} \frac{2^n}{(2^n)^p} = \sum_{n=0}^{\infty} \frac{1}{(2^n)^{p-1}} = \sum_{n=0}^{\infty} (\frac{1}{2^{p-1}})^n
+\end{equation}
+
+Note that this is a geometric series. Since $p > 1$, $1/2^{p-1} < 1$. Thus, this is a geometric series, and the series $\sum_{n=1}^{\infty} 1/n^p$ converges. 
