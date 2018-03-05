@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{amsmath}
+\usepackage{flexisym}
 
 \begin{document}
 
@@ -33,7 +34,7 @@ Construct nested intervals in the following manner: $I_n = [s_n, s_n+1]$. By our
 
 (c) Consider the subsequences $(s_{2n})$ and $(s_{2n+1})$ and show how the Monotone Convergence Theorem leads to a third proof. \\
 
-Take note that the partial sums $(s_{2n})$ and $(s_{2n+1})$ end in even and odd values respectively. Without loss of generality, let us assume that $a_n$ > 0. We can then assert that every even term in the series is less than zero, and every odd term is greater than zero. We will now show that the sequence of partial sums $(s_{2n})$ and $(s_{2n+1})$ are monotone increasing and decreasing respectively. Let us take a look at $s_{2n+2} and s_{2n}$. 
+Take note that the partial sums $(s_{2n})$ and $(s_{2n+1})$ end in even and odd values respectively. Without loss of generality, let us assume that $a_n > 0$. We can then assert that every even term in the series is less than zero, and every odd term is greater than zero. We will now show that the sequence of partial sums $(s_{2n})$ and $(s_{2n+1})$ are monotone increasing and decreasing respectively. Let us take a look at $s_{2n+2}$ and $s_{2n}$. 
 
 \begin{equation}
     s_{2n+2} - s_{2n} = a_{2n+1} + a_{2n+2} > 0
@@ -71,3 +72,128 @@ To prove the reverse direction, we must use some facts about geometric series. A
 \end{equation}
 
 Note that this is a geometric series. Since $p > 1$, $1/2^{p-1} < 1$. Thus, this is a geometric series, and the series $\sum_{n=1}^{\infty} 1/n^p$ converges. 
+
+\newpage
+
+Various tests for the convergence of series are given. I will provide my attempts at proofs of their correctness here. \\
+
+$Thereom:$ Given a series $\sum_{n=1}^{\infty} a_n$ with $a_n \neq 0$, the Ratio Test states that if $(a_n)$ satisfies 
+
+\begin{equation}
+    \lim_{n\to\infty} \bigg|\frac{a_{n+1}}{a_n}\bigg| = r < 1
+\end{equation}
+
+then the series converges absolutely. \\
+
+Let $a\textprime$ satisfy $r < r\textprime < 1$. We can guarantee such a $r\textprime$ exists by the density of $\mathbb{Q}$ in $\mathbb{R}$. Also, by our definition of convergence, we can rewrite the above limit, arguing that for all $n \geq N$, 
+
+\begin{equation}
+    \bigg|\bigg|\frac{a_{n+1}}{a_n}\bigg| - r\bigg| < \epsilon
+\end{equation}
+
+
+We can rewrite this inequality as
+
+\begin{equation}
+    r - \epsilon <\bigg|\frac{a_{n+1}}{a_n}\bigg| < \epsilon + r
+\end{equation}
+
+
+Multiplying each side of the inequality by $|a_n|$ yields
+
+\begin{equation}
+    |a_n|(r-\epsilon) < |a_{n+1}| < |a_n|(r+\epsilon)
+\end{equation}
+
+Fix $\epsilon$ to be small enough so that $r+\epsilon < r\textprime$. It follows that 
+
+\begin{equation}
+    |a_{n+1}| < |a_n|r\textprime
+\end{equation}
+
+Note that this holds for all $n \geq N$. Now, consider the series $|a_N|\sum (r\textprime)^n$. Because $r\textprime < 1$, this is a geometric series, which we have already shown converges. Now, recall the above inequality. 
+
+\begin{equation}
+\begin{split}
+    & |a_{N+1}| < |a_N|r\textprime \\
+    & |a_{N+2}| < |a_N|(r\textprime)^2 \\
+    & |a_{N+3}| < |a_N|(r\textprime)^3 \\
+    & \hspace{11 mm} \vdots
+\end{split}
+\end{equation}
+
+With this inductive argument, the Comparison Test implies that $\sum |a_n|$ converges. \\
+
+\newpage
+
+Below is a nice tool for working with series. \\
+
+Let $(x_n)$ and $(y_n)$ be sequences, and let $s_n = x_1 + x_2 + \dots + x_n$. Use the observation that $x_j = s_j - s_{j-1}$ to verify the formula
+
+\begin{equation}
+    \sum_{j=m+1}^{n} x_j y_j = s_n y_{n+1} - s_m y_{m+1} + \sum_{j=m+1}^{n} s_j(y_{j} - y_{j+1})
+\end{equation}
+
+Let us expand out the summation $\sum_{j=m+1}^{n} s_j(y_{j+1} - y_j)$ from the right side of this formula. 
+
+\begin{equation}
+\begin{split}
+    & \hspace{5 mm} s_{m+1}(y_{m+1} - y_{m+2}) + s_{m+2}(y_{m+2} - y_{m+3}) + \dots + s_{n}(y_{n} - y_{n+1}) \\[15pt]
+    & = s_{m+1}y_{m+1} + y_{m+2}(s_{m+2} - s_{m+1}) + \dots + y_n(s_{n} - s_{n-1}) - s_n y_{n+1} \\[15pt]
+    & = s_{m+1}y_{m+1} + y_{m+2}x_{m+2} + \dots + y_n x_n - s_n y_{n+1} \\[10pt]
+    & = s_{m+1}y_{m+1} - s_n y_{n+1} + \sum_{j=m+2}^{n} x_j y_j
+\end{split}
+\end{equation}
+
+Adding this back to the rest of the right-hand side of the equation yields
+
+\begin{equation}
+\begin{split}
+    & \hspace{5 mm} s_n y_{n+1} - s_m y_{m+1} + s_{m+1}y_{m+1} - s_n y_{n+1} + \sum_{j=m+2}^{n} x_j y_j \\
+    &= y_{m+1}(s_{m+1} - s_m) + ( s_n y_{n+1} - s_n y_{n+1}) + \sum_{j=m+2}^{n} x_j y_j \\
+    &= x_{m+1} y_{m+1} + \sum_{j=m+2}^{n} x_j y_j \\
+    &= \sum_{j=m+1}^{n} x_j y_j
+\end{split}
+\end{equation}
+
+Thus, the right-hand side equals the left hand side as desired. This lemma will come in handy for the next proof. 
+\newpage
+
+Dirichlet's Test for convergence states that if the partial sums of $\sum_{n=1}^{\infty} x_n$ are bounded (but not necessarily convergent),
+and if $(y_n)$ is a sequence satisfying $y_1 \geq y_2 \geq y_3 \geq \dots \geq 0$ with $\lim_{n\to \infty} y_n = 0$,
+then the series $\sum_{n=1}^{\infty} x_n y_n$ converges. \\
+
+Let $M > 0$ be a bound on the partial sums of $\sum_{n=1}^{\infty} x_n$. Then, 
+
+\begin{equation}
+\begin{split}
+    &\hspace{-20 mm}\Bigg|\sum_{j=m+1}^{n} x_j y_j \Bigg| = \Bigg| s_n y_{n+1} - s_m y_{m+1} + \sum_{j=m+1}^{n} s_j(y_{j} - y_{j+1})\Bigg| \\
+    &\leq | s_n y_{n+1} - s_m y_{m+1} + \sum_{j=m+1}^{n} M(y_{j} - y_{j+1}) | \\
+    &= | M y_{n+1} - s_m y_{m+1} + M y_{m+1} - M y_{n+1} | \\[10 pt]
+    &\leq | (M - s_m) y_{m+1} |
+\end{split}
+\end{equation}
+
+Since $M$ is a bound on the partial sums $s_n$, $M - s_m$ is at most $2M$. This gives us the desired result
+
+\begin{equation}
+    \Bigg|\sum_{j=m+1}^{n} x_j y_j \Bigg| \leq 2M|y_{m+1}|
+\end{equation}
+
+Since $y_n \rightarrow 0$, we can argue that for all $m \geq N$, 
+
+\begin{equation}
+    | y_m | < \frac{\epsilon}{2M}
+\end{equation}
+
+Notice how in (18), the right-hand side is independent of the choice of n. Thus, the inequality becomes
+
+\begin{equation}
+\begin{split}
+    &\Bigg|\sum_{j=m+1}^{n} x_j y_j \Bigg| \leq 2M(\frac{\epsilon}{2M}) = \epsilon
+\end{split}
+\end{equation}
+
+Let $S_n$ represent the $n^{th}$ partial sum of the entire series. Thus, we have shown that for all $n, m \geq N$, $|S_n - S_m| < \epsilon$. Therefore, the sequence of partial sums is Cauchy, and the series converges.  
+
+\end{document}
