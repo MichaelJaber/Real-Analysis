@@ -156,7 +156,7 @@ Adding this back to the rest of the right-hand side of the equation yields
 \end{split}
 \end{equation}
 
-Thus, the right-hand side equals the left hand side as desired. This lemma will come in handy for the next proof. 
+Thus, the right-hand side equals the left-hand side as desired. This lemma will come in handy for the next proof. 
 \newpage
 
 Dirichlet's Test for convergence states that if the partial sums of $\sum_{n=1}^{\infty} x_n$ are bounded (but not necessarily convergent),
@@ -168,7 +168,7 @@ Let $M > 0$ be a bound on the partial sums of $\sum_{n=1}^{\infty} x_n$. Then,
 \begin{equation}
 \begin{split}
     &\hspace{-20 mm}\Bigg|\sum_{j=m+1}^{n} x_j y_j \Bigg| = \Bigg| s_n y_{n+1} - s_m y_{m+1} + \sum_{j=m+1}^{n} s_j(y_{j} - y_{j+1})\Bigg| \\
-    &\leq | s_n y_{n+1} - s_m y_{m+1} + \sum_{j=m+1}^{n} M(y_{j} - y_{j+1}) | \\
+    &\leq | M y_{n+1} - s_m y_{m+1} + \sum_{j=m+1}^{n} M(y_{j} - y_{j+1}) | \\
     &= | M y_{n+1} - s_m y_{m+1} + M y_{m+1} - M y_{n+1} | \\[10 pt]
     &\leq | (M - s_m) y_{m+1} |
 \end{split}
@@ -194,6 +194,82 @@ Notice how in (18), the right-hand side is independent of the choice of n. Thus,
 \end{split}
 \end{equation}
 
-Let $S_n$ represent the $n^{th}$ partial sum of the entire series. Thus, we have shown that for all $n, m \geq N$, $|S_n - S_m| < \epsilon$. Therefore, the sequence of partial sums is Cauchy, and the series converges.  
+Let $S_n$ represent the $n^{th}$ partial sum of the entire series. Thus, we have shown that for all $n, m \geq N$, $|S_n - S_m| < \epsilon$. Therefore, the sequence of partial sums is Cauchy, and the series converges. \\
+
+Notice how the Alternating Series Test is a special case of Dirichlet's Test. Consider a monotone decreasing sequence $(y_n)$ that converges to 0, just as in the hypothesis of the theorem. Then, consider the sequence $x_n = (-1)^n$. The product of these two series satisfies the hypothesis of the Alternating Series Test, and by Dirichlet's Test is a convergent series. 
+
+\newpage
+
+Lastly, I will conclude with my proof of Abel's Test. Abel's Test for convergence states that if the series $\sum_{n=1}^\infty x_n$ converges, and if $(y_n)$ is a sequence satisfying 
+
+\begin{equation}
+    y_1 \leq y_2 \leq y_3 \leq \dots 0
+\end{equation}
+
+then the series $\sum_{n=1}^\infty x_n y_n$ converges. \\
+
+First, note how the hypothesis of Abel's test differs from that of Dirichlet's Test. The hypothesis of Dirichlet's Test requires that the sequence $y_n \rightarrow 0$, unlike Abel's Test. In addition, in Abel's Test, the series $\sum_{n=1}^\infty x_n$ must converge, whereas in Dirichlet's Test this condition need not be met. \\
+
+Assume that $\sum_{n=1}^\infty a_n$ has partial sums that are bounded by a constant $A > 0$, and assume $b_1 \geq b_2 \geq b_3 \geq \dots 0$. 
+
+Without repeating the work from the last proof, we can assert the follow inequality. 
+
+\begin{equation}
+    \Bigg|\sum_{j=1}^n a_j b_j\Bigg| \leq 2Ab_1
+\end{equation}
+
+With this inequality, and a bit of substitution, we will arrive at the conclusion that the series in question is Cauchy, and is thus convergent. Firstly, note that since $\sum_{n=1}^\infty x_n$ is convergent, the sequence of partial sums is Cauchy. Thus, for all $n, m \geq N$,  
+
+\begin{equation}
+    \sum_{j=m+1}^n x_j = |s_n - s_m | < \frac{\epsilon}{4y_{m+1}}
+\end{equation}
+
+Thus, for sufficiently large $m$, $\epsilon / 2y_{m+1}$ is a bound on the partial sums of $\sum_{j=m+1}^n x_j$. Now, for a fixed $m \in N$, set $a_n = x_{m+n}$ and $b_n = y_{m+n}$. With this substitution, the inequality becomes 
+
+\begin{equation}
+    \Bigg|\sum_{j=m+1}^n x_j x_j\Bigg| = \Bigg|\sum_{j=1}^{n-m} a_j b_j\Bigg| \leq 2Ab_1
+\end{equation}
+
+Now, note that in this situation, $b_1 = y_m+1$. In addition, $A$ is an upper bound on the partial sums of $a_n$. We have already shown, however, that for sufficiently large $m$, the partial sums of $\sum_{j=m+1}^n x_j$ are bounded above by $\epsilon / 2y_{m+1}$. Thus, the inequality becomes 
+
+\begin{equation}
+    \Bigg|\sum_{j=m+1}^n x_j y_j\Bigg| \leq 2(y_{m+1})(\frac{\epsilon}{4y_{m+1}}) = \epsilon / 2 < \epsilon
+\end{equation}
+
+Let $S_n$ represent the $n^{th}$ partial sum of $\sum_{n=1}^\infty x_n y_n$. Thus, for all $n, m \geq N$, 
+
+\begin{equation}
+    |S_n - S_m| =  \Bigg|\sum_{j=m+1}^n x_j y_j\Bigg| < \epsilon
+\end{equation}
+
+and the sequence is Cauchy. Thus, the series is convergent, and the theorem is proven. \\
+
+Last Tuesday, we talked about the convergence of certain infinite series to some very interesting limits. When I looked into the topic, it seemed that most of the techniques used to prove the existence of such limits were out of the scope of my knowledge of analysis. I did, however, find out the reasoning behind why the alternating harmonic series converges to $\ln 2$. \\
+
+Without going too deep into the existence or construction of Taylor series, let us assume for now that the terms of a Taylor series follow the following pattern. 
+
+\begin{equation}
+    f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} x^n
+\end{equation}
+
+Consider the function $f(x) = ln(1+x)$. The derivatives of this function can be written in terms of $n$ as
+
+\begin{equation}
+    f^{(n)}(a) = (-1)^{n+1}\frac{(n-1)!}{(1+a)^n}
+\end{equation}
+
+Substituting this back into the original function yields
+
+\begin{equation}
+    f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} x^n = \sum_{n=0}^\infty (-1)^{n+1}\frac{x^n}{n}
+\end{equation}
+
+It follows that
+
+\begin{equation}
+    f(1) = ln(2) = \sum_{n=1}^\infty (-1)^{n+1}\frac{1}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \dots 
+\end{equation}
+
+Note that the index of the infinite sum starts from 1 rather than 0. This is because the term $a_0$ in the Taylor series is defined as $\frac{f(0)}{0!}$, and since $f(0) = 0$, we need not include the first term in our series. 
 
 \end{document}
