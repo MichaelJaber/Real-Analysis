@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage[utf8]{amsmath}
+\usepackage{flexisym}
+\usepackage{commath}
+
+\begin{document}
+
+These are my notes for Section 2.8 from Abbott on Double Summations and Products of Infinite Series. The style of this section is unique, as the reader is left to prove the various lemmas and theorems necessary to arrive at the final conclusions. I will provide those proofs here. It should be noted that I am simply filling in any arguments that are left out. Most of the statements that are provided in the text are also included here. \\
+
+We turn our attention back to the double summation that motivated our study of infinite series at the beginning of section 2. One approach to computing the sum here is to find the sequence of partial sums, where each partial sum $s_{mn}$ is the sum over a rectangle such that 
+
+\begin{equation}
+    s_{mn} = \sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}
+\end{equation}
+
+Abbott notes that if we find that $s_{nn}$ converges, it may be suitable to define the double summation to this limit. Let us compute $lim_{n \to \infty} s_{nn}$. Through some investigation, one finds that the general form of the partial sum is 
+
+\begin{equation}
+    s_{nn} = \sum_{i=1}^n -\bigg(\frac{1}{2}\bigg)^{i-1}
+\end{equation}
+
+Since this series is a geometric series, we can conclude that the sequence of partial sums $s_{nn}$ converges to $-2$. \\
+
+$Theorem$: Let $\{a_{ij}:i, j \in \mathbb{N}\}$ be a doubly indexed array of real numbers. If 
+
+\begin{equation}
+    \sum_{i=1}^\infty \sum_{j=1}^\infty |a_{ij}|
+\end{equation}
+
+converges, then both $\sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}$ and $\sum_{j=1}^\infty \sum_{i=1}^\infty a_{ij}$ converge to the same value. Moreover, 
+
+\begin{equation}
+    \lim_{n \to \infty} s_{nn} = \sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij} = \sum_{j=1}^\infty \sum_{i=1}^\infty a_{ij}
+\end{equation}
+
+where $s_{nn} = \sum_{i=1}^n \sum_{j=1}^n a_{ij}$. \\
+
+$Proof.$ Similarly to how we defined $s_{mn}$, define 
+
+\begin{equation}
+    t_{mn} = \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|
+\end{equation}
+
+We are given that the series $\sum_{i=1}^\infty \sum_{j=1}^\infty |a_{ij}|$ converges, which implies the sequence of partial sums $t_{mn}$ converges as well. Since every convergent sequence is bounded, it holds that the set $\{t_{mn}: m, n \in \mathbb{N}\}$ is bounded. Now, we turn our attention to the sequence $t_{nn}$. This sequence is bounded above as we have already shown. In addition, since we are summing $|a_{ij}|$, the sequence is monotone increasing. By the monotone convergence theorem, $t_{nn}$ converges, which implies that $t_{nn}$ is Cauchy. We now have all that we need to show that $s_{nn}$ converges. For sufficiently large $m, n \geq N_1$,
+
+\begin{equation}
+\begin{split}
+    |s_{nn} - s_{mm}| &= \Bigg| \sum_{i=1}^n \sum_{j=1}^n a_{ij} - \sum_{i=1}^m \sum_{j=1}^m a_{ij}\Bigg| \\[5 mm]
+    &= \Bigg| \sum_{i=m+1}^n \sum_{j=1}^n a_{ij} + \sum_{i=1}^m\sum_{j=m+1}^n a_{ij}\Bigg| \\[5 mm]
+    &\leq \sum_{i=m+1}^n \sum_{j=1}^n |a_{ij}| + \sum_{i=1}^m\sum_{j=m+1}^n |a_{ij}|\\[5 mm]
+    &=|t_{nn} - t_{mm}|\\[5 mm]
+    &< \epsilon
+\end{split}
+\end{equation}
+
+Thus, we have shown that the sequence $s_{nn}$ is Cauchy. We can now set 
+
+\begin{equation}
+    S = \lim_{n \to \infty} s_{nn}
+\end{equation}
+
+All that is left to show is that the two iterated sums converge to the same limit. Because $\{t_{mn}: m, n \in \mathbb{N}\}$ is bounded above, we may set 
+
+\begin{equation}
+    B = \sup \{t_{mn}: m, n \in \mathbb{N}\}
+\end{equation}
+
+Let $\epsilon > 0$ be arbitrary. Since $B$ is the supremum of this set, there exists $t_{n_{0}m_0}$ such that $B - \frac{\epsilon}{2} < t_{n_{0}m_0} \leq B$.\\
+
+As we showed earlier, the sequence $t_{mn}$ is monotone increasing. If we set $N_2 = \max\{n_0, m_0\}$, then it follows that for all $m, n \geq N_2$, $B - \frac{\epsilon}{2} < t_{mn} \leq B$. In effect, we have shown that for all $m, n \geq N_2$, $|t_{nn} - t_{mn}| < \epsilon / 2$. The aims of this machinery we have shown is to validate the statement $|s_{mn} - S| < \epsilon$. In order to do so, we need the following inequality. Without loss of generality, assume $n > m$.
+
+\begin{equation}
+\begin{split}
+    |s_{nn} - s_{nm}| &= \Bigg|\sum_{i=1}^n \sum_{j=1}^n a_{ij} - \sum_{i=1}^n \sum_{j=1}^m a_{ij}\Bigg| \\
+    &= \Bigg|\sum_{i=1}^n \sum_{j=m+1}^n a_{ij}\Bigg| \\
+    &\leq \sum_{i=1}^n \sum_{j=m+1}^n |a_{ij}| \\
+    &=|t_{nn} - t_{mn}| \\
+    &< \frac{\epsilon}{2}
+\end{split}
+\end{equation}
+
+Finally, we can combine these statements to argue that for sufficiently large $m, n$
+
+\begin{equation}
+\begin{split}
+    |s_{mn} - S| &= |(s_{mn} - s_{nn}) + (s_{nn} - S)| \\
+    &\leq | s_{mn} - s_{nn} | + |s_{nn} - S| \\
+    &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+    &= \epsilon
+\end{split}
+\end{equation}
+
+Setting $N = \max \{N_1, N_2\}$ ensures that this inequality holds for all $m, n \geq N$. For the moment, consider $m \in 
+\mathbb{N}$ and write $s_{mn}$ as
+
+\begin{equation}
+    s_{mn} = \sum_{j=1}^n a_{1j} + \sum_{j=1}^n a_{2j} + \dots + \sum_{j=1}^n a_{mj}
+\end{equation}
+
+Our hypothesis guarantees that for each fixed row $i$, $\sum_{j=1}^\infty a_{ij}$ converges absolutely to some real number $r_i$. Using the Algebraic and Order Limit Theorems, 
+
+\begin{equation}
+    \abs{(r_1 + r_2 + \dots + r_m) - S} \leq \abs{s_{mn} - S} < \epsilon
+\end{equation}
+
+Thus, we have shown that the iterated sum $\sum_{i=1}^m \sum_{j=1}^\infty a_{ij}$ converges to $S$ for all $m \geq N$. This implies that the infinite sum  $\sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}$ converges to $S$ as well. Similarly, the same argument can be used to show that for each fixed column $j$, $\sum_{i=1}^\infty a_{ij}$ converges absolutely to some real number $c_i$. Again, we have $\sum_{j=1}^\infty \sum_{i=1}^\infty a_{ij}$ converges to $S$, and the theorem is proven. 
+
+
