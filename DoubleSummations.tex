@@ -2,6 +2,9 @@
 \usepackage[utf8]{amsmath}
 \usepackage{flexisym}
 \usepackage{commath}
+\documentclass{minimal}
+
+
 
 \begin{document}
 
@@ -21,7 +24,7 @@ Abbott notes that if we find that $s_{nn}$ converges, it may be suitable to defi
 
 Since this series is a geometric series, we can conclude that the sequence of partial sums $s_{nn}$ converges to $-2$. \\
 
-$Theorem$: Let $\{a_{ij}:i, j \in \mathbb{N}\}$ be a doubly indexed array of real numbers. If 
+$Theorem$: Let $\{a_{ij} \colon i, j \in \mathbb{N}\}$ be a doubly indexed array of real numbers. If 
 
 \begin{equation}
     \sum_{i=1}^\infty \sum_{j=1}^\infty |a_{ij}|
@@ -41,7 +44,7 @@ $Proof.$ Similarly to how we defined $s_{mn}$, define
     t_{mn} = \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|
 \end{equation}
 
-We are given that the series $\sum_{i=1}^\infty \sum_{j=1}^\infty |a_{ij}|$ converges, which implies the sequence of partial sums $t_{mn}$ converges as well. Since every convergent sequence is bounded, it holds that the set $\{t_{mn}: m, n \in \mathbb{N}\}$ is bounded. Now, we turn our attention to the sequence $t_{nn}$. This sequence is bounded above as we have already shown. In addition, since we are summing $|a_{ij}|$, the sequence is monotone increasing. By the monotone convergence theorem, $t_{nn}$ converges, which implies that $t_{nn}$ is Cauchy. We now have all that we need to show that $s_{nn}$ converges. For sufficiently large $m, n \geq N_1$,
+We are given that the series $\sum_{i=1}^\infty \sum_{j=1}^\infty |a_{ij}|$ converges, which implies the sequence of partial sums $t_{mn}$ converges as well. Since every convergent sequence is bounded, it holds that the set $\{t_{mn}\colon m, n \in \mathbb{N}\}$ is bounded. Now, we turn our attention to the sequence $t_{nn}$. This sequence is bounded above as we have already shown. In addition, since we are summing $|a_{ij}|$, the sequence is monotone increasing. By the monotone convergence theorem, $t_{nn}$ converges, which implies that $t_{nn}$ is Cauchy. We now have all that we need to show that $s_{nn}$ converges. For sufficiently large $m, n \geq N_1$,
 
 \begin{equation}
 \begin{split}
@@ -59,10 +62,10 @@ Thus, we have shown that the sequence $s_{nn}$ is Cauchy. We can now set
     S = \lim_{n \to \infty} s_{nn}
 \end{equation}
 
-All that is left to show is that the two iterated sums converge to the same limit. Because $\{t_{mn}: m, n \in \mathbb{N}\}$ is bounded above, we may set 
+All that is left to show is that the two iterated sums converge to the same limit. Because $\{t_{mn} \colon m, n \in \mathbb{N}\}$ is bounded above, we may set 
 
 \begin{equation}
-    B = \sup \{t_{mn}: m, n \in \mathbb{N}\}
+    B = \sup \{t_{mn}\colon m, n \in \mathbb{N}\}
 \end{equation}
 
 Let $\epsilon > 0$ be arbitrary. Since $B$ is the supremum of this set, there exists $t_{n_{0}m_0}$ such that $B - \frac{\epsilon}{2} < t_{n_{0}m_0} \leq B$.\\
@@ -97,12 +100,223 @@ Setting $N = \max \{N_1, N_2\}$ ensures that this inequality holds for all $m, n
     s_{mn} = \sum_{j=1}^n a_{1j} + \sum_{j=1}^n a_{2j} + \dots + \sum_{j=1}^n a_{mj}
 \end{equation}
 
-Our hypothesis guarantees that for each fixed row $i$, $\sum_{j=1}^\infty a_{ij}$ converges absolutely to some real number $r_i$. Using the Algebraic and Order Limit Theorems, 
+Our hypothesis guarantees that for each fixed row $i$, $\sum_{j=1}^\infty a_{ij}$ converges absolutely to some real number $r_i$. Firstly, note that by the Algebraic Limit Theorem, 
 
 \begin{equation}
-    \abs{(r_1 + r_2 + \dots + r_m) - S} \leq \abs{s_{mn} - S} < \epsilon
+    \lim_{n \to \infty} s_{mn} = r_1 + r_2 + \dots + r_m
 \end{equation}
 
-Thus, we have shown that the iterated sum $\sum_{i=1}^m \sum_{j=1}^\infty a_{ij}$ converges to $S$ for all $m \geq N$. This implies that the infinite sum  $\sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}$ converges to $S$ as well. Similarly, the same argument can be used to show that for each fixed column $j$, $\sum_{i=1}^\infty a_{ij}$ converges absolutely to some real number $c_i$. Again, we have $\sum_{j=1}^\infty \sum_{i=1}^\infty a_{ij}$ converges to $S$, and the theorem is proven. 
+In addition, $\abs{s_{mn} - S} < \epsilon$ implies 
+
+\begin{equation}
+    S - \epsilon < s_{mn} < S + \epsilon
+\end{equation}
+
+Note that the sum $r_1 + r_2 + \dots + r_m$ is always less than or equal to $S + \epsilon$ for sufficiently large $m, n$ by the above inequality. In addition, this sum is also greater than or equal to $S - \epsilon$ for sufficiently large $m, n$. By the Order Limit Theorem, 
+
+\begin{equation}
+    \abs{(r_1 + r_2 + \dots + r_m) - S} \leq \epsilon
+\end{equation}
+
+Thus, we have shown that the iterated sum $\sum_{i=1}^m \sum_{j=1}^\infty a_{ij}$ converges to $S$ for all $m \geq N$. This implies that the infinite sum  $\sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}$ converges to $S$ as well. Similarly, the same argument can be used to show that for each fixed column $j$, $\sum_{i=1}^\infty a_{ij}$ converges absolutely to some real number $c_i$. Again, we have $\sum_{j=1}^\infty \sum_{i=1}^\infty a_{ij}$ converges to $S$, and the theorem is proven. \\
+
+One final common way of computing a double summation is to sum along
+diagonals where i + j equals a constant. Given a doubly indexed array $\{a_{ij} \colon
+i, j \in \mathbb{N}\}$, let 
+
+\begin{equation*}
+    d_2 = a_{11}, d_3 = a_{12} + a_{21}, d_4 = a_{13} + a_{22} + a_{31},
+\end{equation*}
+
+and in general set
+
+\begin{equation*}
+d_k = a_{1,k-1} + a_{2,k-2} + \dots + a_{k-1,1}.
+\end{equation*}
+Then, $\sum_{k=2}^\infty d_k$ represents another reasonable way of summing over every $a_{ij}$ in
+the array. \\
+
+Assuming the hypothesis of the theorem we just proved, we will show that $\sum_{k=2}^\infty d_k$ converges absolutely. \\
+
+$Proof.$ Using the notation from the proof above, based on the definition for $d_k$, it is clear that each $\abs{d_k}$ is bounded above by $t_{kk}$. We have already shown that the sequence $t_{nn}$ is Cauchy, thus by the Order Limit Theorem, $\sum_{k=2}^\infty d_k$ converges absolutely. \\
+
+Now, we will show that $\sum_{k=2}^\infty d_k$ converges to $S = \lim_{n \to \infty} s_{nn}$. Let $T_n$ denote the $n^{th}$ partial sum of the series $\sum_{k=2}^\infty d_k$. Recall that the sequence $t_{nn}$ is Cauchy. Set $n$  to be large enough so that $\frac{n-1}{2} \geq N$. Let $m = \frac{n-1}{2}$.
+
+\begin{equation}
+\begin{split}
+    \abs{T_n - S} &= \abs{(T_n - s_{mm}) + (s_{mm} - S)} \\
+    &\leq \abs{T_n - s_{mm}} + \abs{s_{mm} - S} \\
+    &= \abs{\sum_{i=m+1}^n \sum_{j=1}^{m-1} a_{ij} + \sum_{i=1}^{m-1} \sum_{j=m+1}^n a_{ij}} + \abs{s_{mm} - S} \\
+    &\leq \abs{\sum_{i=m+1}^n \sum_{j=1}^{m-1} \abs{a_{ij}} + \sum_{i=1}^{m-1} \sum_{j=m+1}^n \abs{a_{ij}}} + \abs{s_{mm} - S} \\
+    &\leq \abs{t_{nn} - t_{mm}} + \abs{s_{mm} - S} \\
+    &< \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+    &= \epsilon
+\end{split}
+\end{equation}
+
+The indexing on the summation here can be troubling, however it is not unreasonable to think about summing over a doubly indexed array of $a_{ij}$. Each $T_n$ corresponds to the ``triangle" of values underneath the diagonal from $a_{(n,0)}$ to $a_{(0, n)}$. Each $s_{nn}$ corresponds to the square of values enclosed by the ``points" $a_{(0,0)}, a_{(n, 0)}, a_{(0, n)},$ and $a_{(n, n)}$. This visualization makes the argument much easier to follow.\\
+
+Section 2.8 concludes with the topic of products of infinite series. \\
+
+$Theorem$: If $\sum_{i=1}^\infty a_i$ converges absolutely to $A$, and $\sum_{j=1}^\infty b_i$ converges absolutely to $B$, then 
+\begin{equation*}
+    \sum_{i=1}^\infty \sum_{j=1}^\infty a_i b_j =  \sum_{j=1}^\infty \sum_{i=1}^\infty a_i b_j = AB
+\end{equation*}
+
+$Proof.$ Let us first show that the sum $\sum_{i=1}^m \sum_{j=1}^n \abs{a_i b_j}$ is bounded above. This is not too difficult considering our hypothesis. 
+
+\begin{equation*}
+\begin{split}
+    \sum_{i=1}^m \sum_{j=1}^n \abs{a_i b_j} &= b_1(\abs{a_1}  + \dots + \abs{a_m}) + \dots + b_n(\abs{a_1} + \dots + \abs{a_m}) \\
+    &\leq Ab_1 + Ab_2 + \dots + Ab_n \\
+    &= A(b_1 + b_2 + \dots + b_n) \\
+    &\leq AB
+\end{split}
+\end{equation*}
+
+Note that since we are adding $\abs{a_i b_j}$, the sequence of partial sums is also monotone increasing. The monotone convergence theorem implies that $\sum_{i=1}^m \sum_{j=1}^n \abs{a_i b_j}$ converges. Set $s_{nn} = \sum_{i=1}^n \sum_{j=1}^n a_i b_j$. The Algebraic Limit Theorem implies that $\lim_{n \to \infty} s_{nn} = AB$. This combined with the main theorem of this section yields 
+
+\begin{equation*}
+    \sum_{i=1}^\infty \sum_{j=1}^\infty a_i b_j =  \sum_{j=1}^\infty \sum_{i=1}^\infty a_i b_j = \sum_{k=2}^\infty d_k = AB
+\end{equation*}
+
+where $d_k = a_1 b_{k-1} + a_2 b_{k-2} + \dots + a_{k-1}b_1.$
+
+\newpage
+
+I will finish these notes with an exercise using Abel's Partial Summation Formula. \\
+
+Let 
+\begin{equation*}
+    S_x = \sum_{1\leq n \leq x} \frac{(\log n)^2}{n}
+\end{equation*}
+
+Show that 
+
+\begin{equation*}
+    S_x = \frac{1}{3}(\log x)^3 + c_2 + O\bigg(\frac{(\log x)^2}{x}\bigg), x \rightarrow \infty
+\end{equation*}
+
+Let $c_n = 1$ and $f(x) = \frac{(\log x)^2}{x}$. Thus, $C(x) = \big[x\big]$, and $f\textprime(x) = \frac{\log x(2 - \log x)}{x^2}$. With Abel's Summation Formula, $S_x$ becomes 
+
+\begin{equation*}
+\begin{split}
+    S_x &= \big[x\big]\frac{(\log x)^2}{x} - \int_{1}^{x} \big[t\big] \frac{\log t(2 - \log t)}{t^2} dt \\
+    &= (x - \{x\})\frac{(\log x)^2}{x} - \int_{1}^{x} (t - \{t\}) \frac{\log t(2 - \log t)}{t^2} dt \\
+    &= (\log x)^2 + O\bigg(\frac{(\log x)^2}{x}\bigg) - \int_{1}^{x} \frac{\log t(2 - \log t)}{t} dt + 
+    \int_{1}^{x} \{t\} \frac{\log t(2 - \log t)}{t^2} dt \\
+\end{split}
+\end{equation*}
+
+Note that 
+
+\begin{equation*}
+    \int_{1}^{x} \frac{\log t(2 - \log t)}{t} dt = (\log x)^2 - \frac{1}{3}(\log x)^3
+\end{equation*}
+
+and that 
+
+\begin{equation*}
+    \int_{1}^{x} \{t\} \frac{\log t(2 - \log t)}{t^2} dt = \int_{1}^{\infty} \{t\} \frac{\log t(2 - \log t)}{t^2} -\int_{x}^{\infty} \{t\} \frac{\log t(2 - \log t)}{t^2}
+\end{equation*}
+
+As $x \rightarrow \infty$, 
+
+\begin{equation*}
+    \int_{x}^{\infty} \{t\} \frac{\log t(2 - \log t)}{t^2} \in O\bigg(\frac{(\log x)^2}{x}\bigg)
+\end{equation*}
+
+Combining these terms together yields the final result as desired.
+
+\begin{equation*}
+    \frac{1}{3}(\log x)^3 + c_2 + O\bigg(\frac{(\log x)^2}{x}\bigg), x \rightarrow \infty
+\end{equation*}
+
+where $c_2 = \int_{1}^{\infty} \{t\} \frac{\log t(2 - \log t)}{t^2}$.
+
+\newpage
+
+A proof of the general case is given in the provided readings ``Abel Partial Summation Formula". I will provide a proof here as an exercise, but it should be noted that the proof is provided in the reading as well. \\
+
+Assume $f(x)$ is a continuously differentiable function of $x$ with $f(x) \rightarrow 0$ as $x \rightarrow \infty$. Since $f(x) - f(1) = \int_{1}^x f\textprime (t) dt$, and $\lim_{x \to \infty} f(x)$ exists, we know that $\int_{1}^\infty f\textprime (t) dt$ exists, and equals $-f(1)$. We further require that $\int_{1}^\infty \abs{f\textprime (t)} dt < \infty$. We then have 
+
+\begin{equation*}
+    \sum_{1\leq n \leq x} f(n) = \int_{1}^x f(t) dt + \gamma_f + O(\abs{f(x)}) + o(1)
+\end{equation*}
+
+where 
+
+\begin{equation*}
+    \gamma_f = f(1) + \int_{1}^\infty \{t\}f\textprime (t) dt.
+\end{equation*}
+
+Using Abel's Summation Formula, let $c_n = 1$. Then 
+
+\begin{equation*}
+\begin{split}
+    \sum_{1\leq n \leq x} f(n) &= \big[x\big]f(x) - \int_{1}^x \big[t\big] f\textprime (t) dt \\
+    &= (x - \{x\}) f(x) - \int_{1}^x (t - \{t\}) f\textprime (t) dt \\
+    &= xf(x) - \{x\}f(x) - \int_{1}^x t f\textprime (t) dt + \int_{1}^x \{t\} f\textprime (t) dt \\
+\end{split}    
+\end{equation*}
+
+Integration by parts on the $\int_{1}^x t f\textprime (t) dt$ term yields
+
+\begin{equation*}
+    \int_{1}^x t f\textprime (t) dt = xf(x) -f(1) - \int_{1}^x f(t) dt
+\end{equation*}
+
+Thus the equation becomes 
+
+\begin{equation*}
+    f(1) -\{x\} f(x) + \int_{1}^x f(t) dt + \int_{1}^x \{t\} f\textprime (t) dt 
+\end{equation*}
 
 
+Note that 
+
+\begin{equation*}
+    \int_{1}^x \{t\} f\textprime (t) dt = \int_{1}^\infty \{t\} f\textprime (t) dt - \int_{x}^\infty \{t\} f\textprime (t) dt 
+\end{equation*}
+
+
+What is left is to deal with the last term. 
+
+\begin{equation*}
+    \abs{\int_{x}^\infty \{t\} f\textprime (t) dt} \leq \int_{1}^x \abs{\{t\}} \abs{f\textprime (t)} dt \leq
+    \int_{x}^\infty \abs{f\textprime (t)} dt = o(1) 
+\end{equation*}
+
+This is due to the fact that as $x \rightarrow \infty$, $f(x) \rightarrow 0$. We are now left with the following 
+
+\begin{equation*}
+    f(1) -\{x\} f(x) + \int_{1}^x f(t) dt + o(1) + \int_{1}^\infty \{t\} f\textprime (t) dt
+\end{equation*}
+
+Since $0 \leq \{x\} < 1$, $-\{x\} f(x) \in O(\abs{f(x)})$, we are left with 
+
+\begin{equation*}
+    \sum_{1\leq n \leq x} f(n) = \int_{1}^x f(t) dt + \gamma_f + O(\abs{f(x)}) + o(1)
+\end{equation*}
+
+where 
+
+\begin{equation*}
+    \gamma_f = f(1) + \int_{1}^\infty \{t\}f\textprime (t) dt
+\end{equation*}
+
+as desired. \\
+
+One important case of this theorem is when $f(x) = \frac{1}{x}$. The harmonic numbers $H_n$ are defined by 
+
+\begin{equation}
+    H_x = \sum_{1 \leq n \leq x} \frac{1}{n}
+\end{equation}
+
+The above theorem yields 
+
+\begin{equation*}
+    H_x = \log x + \gamma + O\bigg(\frac{1}{x}\bigg)
+\end{equation*}
+
+In this case, $\gamma$ is $Euler's$ $constant$, which has considerable implications on number theory and analysis.
