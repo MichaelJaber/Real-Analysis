@@ -1,0 +1,95 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[mathscr]{euscript}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\begin{document}
+    
+Section 1 provides a brief introduction to the basic topology of $\mathbb{R}$ with a discussion on Cantor's set. Section 2 provides the basic definitions of open and closed sets, along with some basic theorems. I will provide proofs to some of the more interesting ones here. \\
+
+\textit{Theorem: (i) The union of an arbitrary collection of open sets is open. (ii) The intersection of a finite collection of open sets is open. }\\
+
+Let $\{O_\lambda \colon \lambda \in \Lambda\}$ be a collection of open sets and let $O = \cup_{\lambda \in \Lambda} O_\lambda$. Let $a$ be an arbitrary element of $O$. By our construction, $a$ must be an element of some $O_\lambda$. Since each $O_\lambda$ is an open set, there exists some $V_\epsilon (a)$ such that $a \in V_\epsilon (a) \subseteq O_\lambda \subseteq O$. Since the choice of $a$ is arbitrary, it holds that for all $a \in O$, there exists some $\epsilon$-neighborhood surrounding $a$ that is fully contained in $O$, thus $O$ is an open set, and the theorem is proven. \\
+
+As for part (ii) let $\{O_1 , O_2, \dots, O_n\}$ be a finite collection of open sets and let $O = \cap_{k=1}^n O_k$.We can assume that the intersection of these sets is nonempty. If the intersection is empty, the empty set is open and the theorem holds. Let $a \in O$, thus $a \in O_k$ for all $k \in \{1, \dots, n\}$. Since each $O_k$ is an open set, there exists some $V_{\epsilon_k} (a)$ that is contained in every $O_k$. We can simply take the smallest of these $\epsilon$, and it will be guaranteed that this $\epsilon$-neighborhood will be fully contained in $O$. Let $\epsilon = \min\{\epsilon_1, \dots, \epsilon_n\}$, and the theorem is proven. \\
+
+\textbf{Definition}: A point $x$ is a \textit{limit point} of a set $A$ if every $\epsilon$-neighborhood intersects $A$ at some other point than $x$. \\
+
+\textit{Theorem: A point x is a limit point of a set a set A if and only if $x=\lim a_n$ for some sequence $(a_n)$ contained in A satisfying $a_n \neq x$ for all $n \in \mathbb{N}$.} \\
+
+First, let us assume $a$ is a limit point of the set $A$. Thus, every $\epsilon$-neighborhood intersects $A$ at some point other than $x$. Therefore, we can assert that there exists elements $a_n \neq x$ such that 
+
+\begin{equation*}
+    a_n \in V_{\frac{1}{n}} (x) \cap A
+\end{equation*}
+
+The sequence $a_n$ clearly converges to $x$. For some set $\epsilon$, set $N$ so that $\epsilon > \frac{1}{N}$. Then for all $n \geq N$, $| a_n - x | < \epsilon$, which implies $\lim a_n = x$. \\
+
+For the reverse direction, assume $\lim a_n = x$. By our topological definition for convergence, for all $\epsilon > 0$, there exists some $a_n \in V_\epsilon (x)$. Thus, for every open interval in $A$, there exists some point $a_n \neq x$ that is intersected by this open interval. By our definition for a limit point of a set, $x$ is a limit point of the set $A$, and the theorem is proven. \\
+
+Recall the the property that $\mathbb{Q}$ is dense in $\mathbb{R}$. This leads us to the following theorem. \\
+
+\textit{Theorem: Given any $y \in \mathbb{R}$, there exists a sequence of rational numbers that converges to $y$}. \\
+
+Again, let us consider the $\epsilon$-neighborhoods surrounding $y$. Since $\mathbb{Q}$ is dense in $\mathbb{R}$, we can find some $a_n \in \mathbb{Q}$ where $a_n \neq y$ such that
+
+\begin{equation*}
+    a_n \in V_{\frac{1}{n}} (y)
+\end{equation*}
+
+With each of these $a_n$, we can create a sequence of rational numbers. Just as in the proof before, it holds that $\lim a_n = y$, and the theorem is proven. \\
+
+With this theorem, it does not take too much more to make the claim that $\mathbb{R}$ is both an open and closed set. \\
+
+\textit{Theorem: A set O is open if and only if $O^c$ is closed. Likewise, a set F is closed if and only if $F^c$ is open. } \\
+
+For one direction, let us assume $O$ is an open set. Let $x$ be a limit point of $O^c$. We must now show that $x \in O^c$ by arguing that $x$ cannot be in $O$. By definition of a limit point, every $\epsilon$-neighborhood surrounding $x$ intersects $O^c$ at some point other than $x$. Therefore, $x \not \in O$, since open sets require that there exist some $V_\epsilon (x) \subseteq O$. \\
+
+For the reverse direction, let us assume $O^c$ is closed. Since $O^c$ is closed, it contains all of its limit points. Consider some arbitrary $x \in O$. There must exist some $V_\epsilon (x)$ that does not intersect $O^c$, otherwise $x$ would be a limit point of $O^c$, and therefore an element of $O^c$. This statement is equivalent to there exists some $V_\epsilon (x) \subseteq O$, which is exactly what we needed to show that $O$ is an open set.  \\
+
+The second statement follows from the first using the observation that for any set $E \subseteq \mathbb{R}$, $(E^c)^c = E$. \\
+
+\textit{Theorem: For any $A \subseteq \mathbb{R}$, the closure $\overline{A}$ is a closed set and is the smallest closed set containing $A \cup L$.} \\
+
+It is clear from the definition that in order for $\overline{A}$ to be a closed set, it must contain $L$, the set of limit points of $A$. We must make sure, however, that $A \cup L$ does not create any limit points that were not included in $L$. Let $x$ be a limit point of $L$. Therefore, every $\epsilon$-neighborhood of $x$ contains some $y \in L$. Note that $y$ must be a limit point of $A$, therefore every $\epsilon$-neighborhood of $y$ contains some $a \in A$. A simple triangle inequality argument shows 
+
+\begin{equation*}
+\begin{split}
+    |x - a| &= |x - y + y - a| \\
+    &\leq |x - y| + |y - a| \\
+    &= \epsilon / 2 + \epsilon / 2 \\
+    &= \epsilon
+\end{split}
+\end{equation*}
+
+Therefore, $x$ is a limit point of $A$, and by our construction, $x \in L$. Therefore, the set $A \cup L$ is closed, since it contains all of its limit points. \\
+
+As for the second statement, any closed set that contains $A$ must also contain $L$, thus $\overline{A}$ is the smallest closed set containing $A \cup L$. \\
+
+\newpage
+
+\textit{Theorem: The only sets in $\mathbb{R}$ that are both open and closed is $\mathbb{R}$ and $\emptyset$.} \\
+
+For the sake of contradiction, assume there exists a set $A$ that is neither $\mathbb{R}$ or $\emptyset$. In addition, assume that the set $A$ is open and closed. Therefore, for all $a \in A$, there exists an $\epsilon$-neighborhood surrounding $a$ that is a subset of $A$. In addition, $A$ contains all of its limit points. Note that $A^c$ is nonempty, otherwise $A$ would be $\mathbb{R}$. Since $A$ is both open and closed, then it should hold that its complement is both open and closed. Consider the point $x \in A$. Since $A$ is open, there exists some $\epsilon$-neighborhood surrounding $x$ that is a subset of $A$. Let us denote $y$ by 
+
+\begin{equation*}
+    y = \sup \{b \colon [x, b] \subseteq A \}
+\end{equation*}
+
+We can see that $y$ is a limit point of $A$, since every $\epsilon$-neighborhood will contain some point other than $y$ in $A$. In addition, $y$ is a limit point of $A^c$, since some $[x, y + \epsilon]$ will contain some element of $A^c$ by our construction. Since both $A$ and $A^c$ are closed, they both contain their limit points. At this time, we have $y \in A$ and $y \in A^c$, which is a contradiction. 
+
+
+
+
+
+
+
+
+
+    
+    
+\end{document}
