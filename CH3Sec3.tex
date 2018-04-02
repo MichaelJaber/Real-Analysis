@@ -1,0 +1,65 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[mathscr]{euscript}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\documentclass{article}
+\usepackage{mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+\begin{document}
+
+Section 3 is on Compact sets, a topic that is used many times later on in the book. \\
+
+\textbf{Heine-Borel Theorem} \textit{ A set $K \subseteq \mathbb{R}$ is compact if and only if it is closed and bounded. } \\
+
+Assume the set $K$ is compact. Firstly, let us assume towards a contradiction that $K$ is unbounded. Therefore, for all $n \in mathbb{N}$, there exists some $x_N > n$. This contradicts our definition of compactness, since this sequence cannot have a subsequence that converges (convergent sequences are bounded). Thus, $K$ is bounded. \\
+
+We will now show that $K$ is closed. Our definition for compactness states that every sequence has a subsequence that converges to some limit in $K$. From our study of convergent series, we know that every subsequence of a convergent series converges to the same limit as the original series. Since the limit of the subsequence is contained in $K$, then the original sequence must converge to the same limit in $K$. Thus, $K$ is closed. \\
+
+For the reverse direction, let us assume $K$ is closed and bounded. Since $K$ is bounded, by the Bolzano-Weierstrass, every sequence in $K$ has a convergent subsequence. Given some sequence $x_n$ in $K$, there exists some convergent subsequence $x_{n_k}$. All of the terms in $x_{n_k}$ are elements in $K$. Since $K$ is closed, $\lim x_{n_k}$ is an element in $K$. Thus, we have shown that for some sequence $x_n$, it has a convergent subsequence who's limit is in $K$. Since the choice of $x_n$ is arbitrary, $K$ is compact. \\
+
+\textit{Let K be a subset of $\mathbb{R}$. All of the following statements are equivalent in the sense that any one of them implies the two others:}\\
+
+\textit{(i) K is compact.} \\
+
+\textit{(ii) K is closed and bounded. }\\
+
+\textit{(iii) Any open cover for K has a finite subcover.} \\
+
+The Heine-Borel theorem shows the equivalence of (i) and (ii). Let us assume (iii), and show how it implies (ii). We will first show that the set $K$ is bounded. Let the set of open intervals ${O_x \colon x \in K}$ be the open cover of $K$, where each open interval $O_x = (x - \frac{1}{2}, x + \frac{1}{2})$. Thus, each open interval has length 1. Since $K$ has a finite subcover, consisting of bounded open intervals, the $K$ must be bounded. \\ 
+
+Now we will show that $K$ is compact. Consider the sequence $(x_n)$ contained in $K$. Assume towards a contradiction that $\lim x_n = y$, and $y \not \in K$. We may now use (iii) to produce some finite subcover, and argue that $y$ must be an element of $K$. Since $y \not \in K$, each element $x \in K$ has some positive distance away from $y$. Let $O_x$ be the interval $(x - \frac{|x - y|}{2}, x + \frac{|x - y|}{2})$. Thus, the collection of $O_x$ for all $x \in K$ is an open cover for $K$. By (iii), there exists a finite subcover $\{O_1, \dots, O_n\}$. Each $O_i$ surrounds some $x_i$. Let $\epsilon_0$ be denoted by 
+
+\begin{equation*}
+    \epsilon_0 = \min{\bigg\{\frac{\abs{x_i - y}}{2} \colon 1 \leq i \leq n }\bigg\}
+\end{equation*}
+
+Since $x_n$ converges to $y$, there exists some $x_N$ such that $\abs{x_N - y} < \epsilon_0$. Therefore, $x_N$ is not included in our finite subcover, which is a contradiction. Thus, $K$ is closed. \\
+
+To prove the reverse direction, assume $K$ satisfies (i) and (ii), and let $\{ O_\lambda \colon \lambda \in \Lambda \}$ be an open cover for $K$. For contradiction, let's assume no finite subcover exists. Let $I_0$ be a closed interval containing $K$, and bisect $I_0$ into two closed intervals $A_1$ and $B_1$. Either $A \cap K$, $B \cap K$, or both must not have a finite subcover, otherwise $K$ would have a finite subcover. For whichever interval has no finite subcover, set $I_1$ to this interval, and continue bisecting intervals so that $I_n \cap K$ has no finite subcover, $I_0 \supseteq I_1 \supseteq I_2 \supseteq \dots$ and $\lim |I_n| = 0$. The intersection of nested compact sets is nonempty, therefore there exists some $x \in \cap_{n=1}^\infty I_n$, which must be included in some $O_{\lambda_0}$ from our original open cover. Since the size of our intervals become arbitrary small, there exists some $n_0$ large enough such that $I_{n_0} \subseteq O_{\lambda_0}$. At this point we have reached a contradiction, since we assumed that each $I_n$ had no finite subcover. Thus, any open cover for $K$ has a finite subcover, and the theorem is proven. \\
+
+We did use a theorem in the last proof that was not proven earlier, and I will provide that here. \\
+
+\textit{Theorem: If $K_1 \supseteq K_2 \supseteq K_3 \supseteq K_4$ is a nested sequence of nonempty compact sets, then the intersection $\cap_{n=1}^\infty K_n$ is not empty. } \\
+
+Let us produce a sequence $x_n$ such that each $x_i \in K_i$. This sequence is clearly contained in $K_1$, and since $K_1$ is compact, the limit of this sequence $x \in K_1$. In fact, for any $K_i$, all terms in the sequence $x_n$ such that $n \geq i$ are also contained in $K_i$. Since this is a convergent subsequence of $x_n$, the subsequence also converges to $x$, and therefore $x$ must also be an element of $K_i$. This holds for all $K_n$, therefore the limit $x$ is contained in each and every $K_n$, and the intersection is not empty. 
+
+\end{document}
