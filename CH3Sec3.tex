@@ -60,6 +60,16 @@ We did use a theorem in the last proof that was not proven earlier, and I will p
 
 \textit{Theorem: If $K_1 \supseteq K_2 \supseteq K_3 \supseteq K_4$ is a nested sequence of nonempty compact sets, then the intersection $\cap_{n=1}^\infty K_n$ is not empty. } \\
 
-Let us produce a sequence $x_n$ such that each $x_i \in K_i$. This sequence is clearly contained in $K_1$, and since $K_1$ is compact, the limit of this sequence $x \in K_1$. In fact, for any $K_i$, all terms in the sequence $x_n$ such that $n \geq i$ are also contained in $K_i$. Since this is a convergent subsequence of $x_n$, the subsequence also converges to $x$, and therefore $x$ must also be an element of $K_i$. This holds for all $K_n$, therefore the limit $x$ is contained in each and every $K_n$, and the intersection is not empty. 
+Let us produce a sequence $x_n$ such that each $x_i \in K_i$. This sequence is clearly contained in $K_1$, and since $K_1$ is compact, the limit of this sequence $x \in K_1$. In fact, for any $K_i$, all terms in the sequence $x_n$ such that $n \geq i$ are also contained in $K_i$. Since this is a convergent subsequence of $x_n$, the subsequence also converges to $x$, and therefore $x$ must also be an element of $K_i$. This holds for all $K_n$, therefore the limit $x$ is contained in each and every $K_n$, and the intersection is not empty. \\
+
+I thought to include one more interesting example. It is not too hard to show that $\mathbb{Q} \cap [0,1]$ is not compact using the Heine-Borel Theorem. However, a more interesting way to show this would be with our open cover definition for compactness. \\
+
+Consider some irrational number $\alpha$ in the interval $[0, 1]$. We will construct our open covers relative to $\alpha$. For each rational number $r_i$ in $\mathbb{R} \cap [0,1]$, construct each open cover in the following manner, where $O_i = (r_i - \frac{\abs{r_i - \alpha}}{2}, r + \frac{\abs{r_i - \alpha}}{2}) $. It is clear that the union of these open covers are an open cover for our set. Now, for the sake of contradiction assume there exists a finite subcover $\{O_1, O_2, \dots, O_N\}$. Each of these open covers surround some $r_i$, so let us denote the set of rationals that these intervals surround by $\{r_1, r_2, \dots, r_N\}$. Let $\epsilon_0$ be as follows. 
+
+\begin{equation*}
+    \epsilon_0 = \min{\bigg\{\frac{\abs{r_i - \alpha}}{2} \colon 1 \leq i \leq N }\bigg\}
+\end{equation*}
+
+With this in mind, it follows that the open interval $V_{\epsilon_0} (\alpha)$ is not contained in our finite subcover. The contradiction arises when we see that since $\mathbb{Q}$ is dense in $\mathbb{R}$, there exists some rational number $x \in V_{\epsilon_0} (\alpha)$ that is not an element of our finite subcover. Therefore, there does not exist a finite subcover for every open cover of our set, therefore $\mathbb{Q} \cap [0,1]$ is not compact. 
 
 \end{document}
