@@ -1,0 +1,129 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[mathscr]{euscript}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newcommand{\C}{\textbf{C}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\F}{\textbf{F}}
+\newcommand{\N}{\textbf{N}}
+\newcommand{\R}{\textbf{R}}
+\newcommand{\Q}{\textbf{Q}}
+
+\begin{document}
+
+Chapter 3 Section 4 discusses Perfect and Connected Sets. I provide proofs to the more interesting theorems and exercises here. \\
+
+\textbf{Theorem 3.4.2} \textit{A nonempty perfect set is uncountable.} \\
+
+Assume for the sake of contradiction that a perfect set $P$ is countable. Then there exists an enumeration of the elements 
+
+$$
+\{x_1 , x_2, x_3, \dots \}
+$$
+
+Construct a sequence of compact intervals $K_n$ such that 
+
+
+\begin{enumerate}
+    \item $K_n \supseteq K_{n+1}$ 
+    \item $x_n \in K_n$ 
+    \item $x_n \not \in K_{n+1}$ 
+\end{enumerate}
+
+We have already shown that the intersection of nested, nonempty compact sets is nonempty. Now, consider a closed interval $I_1$ that contains $x_1$. Since $x_1$ is not isolated, there exists some $y_1 \in I_1$. Construct the closed interval $I_2$ containing $y_1$ so that $I_2 \subseteq I_1$ and $x_1 \not \in I_1$. Continue taking nested closed intervals $I_n$ so that 
+
+\begin{enumerate}
+    \item $I_n \supseteq I_{n+1}$
+    \item $I_n \cap P \neq \emptyset$
+    \item $x_n \not \in I_{n+1}$
+\end{enumerate}
+
+Let $K_n = I_n \cap P$. $K_n$ is compact since it is the intersection of two closed sets, and bounded since each $I_n$ is bounded. We arrive at the contradiction when we see that since $x_n \not \in I_{n+1}$, 
+
+\begin{equation*}
+    \bigcap\limits_{n=1}^{\infty} K_n = \emptyset
+\end{equation*}
+
+However, recall that the arbitrary intersection of compact sets is nonempty. Thus, we conclude that a nonempty perfect set is uncountable. \\
+
+
+In a way, this should make sense to us. Since we do not have any isolated points, we are dealing with at least a countable number of points, all of which contain at least a countable number of points surrounding them according to some $\epsilon$. One idea that we may generalize is that when we have a infinite number of objects, all of which that associate with a countable number of distinct objects, the set in total is uncountable. This is not a rigorous argument, but there is some evidence to believe such a statement is true, such as the fact that the set of all bit strings of infinite length are uncountable. In addition, we have formalized the intuition that perfect sets are generalization of compact, closed intervals that are uncountable. We learned early in our study of analysis that the set of points in a closed interval are uncountable, and we have provided a rigorous undertaking of this here. We will further explore similar ideas in our discussion of Baire's Theorem, which is in Section 5. \\
+
+\textbf{Proposition} \textit{Every nonempty open set $O \subseteq \mathbb{R}$ is uncountable} \\
+
+The open set $O$ is nonempty, therefore there exists some $x \in O$. In addition, the fact that $O$ is open guarantees that there exists some $\epsilon$ such that $V_\epsilon (x) \subseteq O$. The closed interval $[x - \epsilon/2, x + \epsilon/2]$ is clearly a subset of $O$. This interval is a perfect set, therefore it follows from the preceding theorem that $O$ is uncountable. \\
+
+\textbf{Theorem 3.4.6} \textit{A set $E \subseteq \mathbb{R}$ is connected if and only if, for all nonempty
+disjoint sets $A$ and $B$ satisfying $E = A \cup B$, there always exists a convergent
+sequence ($x_n$) $\to x$ with ($x_n$) contained in one of $A$ or $B$, and $x$ an element of
+the other}. \\
+
+For one direction, assume $E$ is connected. Therefore, it holds that either $A \cap \overline{B} \neq \emptyset$ or $\overline{A} \cap B \neq \emptyset$. Without loss of generality, let us assume the former. If the other case holds, the argument is no different. Since $\overline{A} \cap B$ is nonempty, there exists some $x$ in the closure of $A$ that is also contained in $B$. Since $\overline{A}$ is closed, there exists some sequence $(x_n)$ fully contained in $A$ that converges to $x$, and first direction is proven. \\
+
+For the opposite direction, assume for all nonempty disjoint sets $A$ and $B$ satisfying $E = A \cup B$, there always exists a convergent sequence $(x_n) \to x$ with $(x_n)$ contained in one of $A$ or $B$, and $x$ an element of the other. Therefore, it follows that $x$ is a limit point of $A$, thus $x \in \overline{A}$. By our hypothesis, $x \in B$ as well, therefore it follows that $\overline{A} \cap B \neq \emptyset$, and the theorem is proven. \\
+
+This statement feels oddly reminiscent to how we characterized compact sets. For compact sets, every point in the set had some sequence that converged to it. However, this statement on connectedness makes a more nuanced argument. No matter how we partition our set, there exists some ``path" of points such that we can get from one partition to the other. In a sense, every connected set has a ``bridge" of sorts in the form of a convergent sequence to get from one partition to the other. \\
+
+\textbf{ Theorem 3.4.7} \textit{ A set $E \subseteq \mathbb{R}$ is connected if and only if whenever $a < c < b$
+with $a, b \in E$, it follows that $c \in E$ as well.} \\
+
+Consider the following sets 
+
+$$
+A = (-\infty, c) \cap E \qquad B = (c, \infty) \cap E
+$$
+
+If $A \cup B = E$, since $E$ is connected, it should follow that either $A \cap \overline{B} \neq \emptyset$ or $\overline{A} \cap B \neq \emptyset$. However, we see that this is not the case. Thus, $A \cup B$ must be missing a point, thus $c \in E$. \\
+
+For the reverse direction, assume if whenever $a < c < b$ with $a, b \in E$, it follows that $c \in E$ as well. Let $A, B$ be nonempty, disjoint sets such that $A \cup B$. We hope to use our hypothesis to construct a sequence that is fully contained in one set and converges to an element in the other. Since both of these sets are nonempty, there exists $a_0 \in A$ and $b_0 \in B$. Without loss of generality, assume $a_0 < b_0$. Construct the closed interval $I_0 = [a_0, b_0]$, and bisect this interval into two halves. The midpoint $c_0$ of $I_0$, is guaranteed to be in $E$. Additionally, of these two intervals, there must exist an interval such that the left endpoint is contained in one set, and the right endpoint is contained in the other. Call this interval $I_1$. To see why this is true, assume $c_0$ is in $A$. Therefore, the interval $[c_0, b_0]$ has endpoints in $A$ and $B$. Similarly, if $c_0 \in A$, the interval $[a_0, c_0]$ retains the same property. Continue constructing intervals in this manner so that each $I_n$ has one endpoint in $A$ and the other in $B$, as well as $I_{n+1} \subseteq I_n$. Now that we have constructed our sequence of intervals, pick points let $a_n$ be the endpoint of $I_n$ that is contained in $A$, and let $b_n$ be the endpoint of $I_n$ that is contained in $B$. Since we are bisecting each interval, we see that $|I_n| \to 0$. By the nested interval property, 
+
+$$
+    x \in \bigcap_{n=0}^\infty I_n
+$$
+
+which implies that $\lim a_n = x$ and $\lim b_n = x$. Since $x$ must be in either $A$ or $B$, either way we have provided a sequence that is fully contained in one set that converges to an element in the other. By Theorem 3.4.6, $E$ is connected, and the theorem is proven. \\
+
+Again, the Nested Interval Property, and by equivalence the Axiom of Completeness make an appearance. What we have shown is that many of the properties we observe about the real number line are really just extensions and consequences of the completeness axiom. Just how we formalized the intuition that real numbers ``have no holes", we see that connected sets retain this property as well. The statement in our hypothesis of Theorem 3.4.7 should remind us of the proof for the density of \textbf{Q} in \textbf{R}. In a sense, connected sets are dense in themselves, meaning between any two points in the set, there exists another point in the set. However, our statement is even stronger than this. For any point that is between two points in the set, that point is also a member of the set. With this, it is not too hard to show that every nonempty connected set (excluding singletons) is uncountable, since we can simply take an open interval $(a, b) \subseteq E$, with  $a,b \in E$, and by the corollary we proved earlier it follows that $E$ is uncountable. \\
+
+\textbf{Exercise 3.4.5} Let $A$ and $B$ be subsets of \textbf{R}. Show that if there exist disjoint
+open sets $U$ and $V$ with $A \subseteq U$ and $B \subseteq V$ , then $A$ and $B$ are separated. \\
+
+If $A$ or $B$ are empty, the theorem is proven. Assume for the sake of contradiction that nonempty sets $A$ and $B$ are not separated. Without loss of generality, we can argue that there exists a sequence $(x_n)$ fully contained in $A$ that converges to an element $x \in B$. Since $B \subseteq V$, there exists an $\epsilon$-neighborhood $V_\epsilon (x)$ such that $V_\epsilon (x) \subseteq V$. Since $x_n \to x$, there exists an $N \in$ \textbf{N} such that for all $n \geq N$, $x_n \in V_{\epsilon/2} (x)$. Clearly, $V_{\epsilon/2} (x) \subseteq V_{\epsilon} (x) \subseteq V$. The contradiction arises when we realize that there exists $x_n \in A$ as well as in $V$. $U$ and $V$ were assumed to be disjoint, but we have produced $x_n \in U \cap V$, thus $A$ and $B$ must have been separated. \\
+
+One last interesting exercise is provided here. \\
+
+\textbf{Exercise 3.4.10} Let $\{r_1, r_2, r_3, \dots \}$ be an enumeration of the rational numbers,
+and for each $n \in \N$ set $\epsilon_n = 1/2^n$ Define $O = \cup_{n=1}^\infty V_{\epsilon_n} (r_n)$, and let $F = O^c$. \\
+
+(a) Argue that $F$ is a closed, nonempty set consisting only of irrational
+numbers. \\
+
+The measure of $O$ is given by 
+
+$$
+\mu(O) \leq \sum_{n=1}^\infty 2\epsilon_n = \sum_{n=1}^\infty 2 \bigg(\frac{1}{2}\bigg)^n = 4
+$$
+
+Since the measure is finite, it cannot possibly cover all of \R. Therefore, since $\Q \subseteq O$, it must hold that $F$ is nonempty and contains only irrational numbers. As for the fact that $F$ is closed, note that $O$ is the union of open intervals, thus its complement must be closed. \\
+
+(b) Does $F$ contain any nonempty open intervals? Is $F$ totally disconnected? \\
+
+For the sake of contradiction, assume $F$ contains a nonempty open interval. Since \textbf{Q} is dense in \R, there must exist some $r_N$ that is in this open interval. This contradicts (a), however, since $F$ contains only irrational numbers. As for if $F$ is totally disconnected, we must show for any two $x, y \in F$, there exists separated sets such that $x \in A$, $y \in B$, and $A \cup B = F$. Again, since \textbf{Q} is dense in \R, there exists some $\alpha \in \Q$. Consider the sets
+
+$$
+A = (-\infty, \alpha) \cap F \qquad        B = (\alpha, \infty) \cap F
+$$
+
+Clearly, $A \cup B = F$. However, , since the sets $(-\infty, \alpha)$ and $(\alpha, \infty)$ are separated, thus $A$ and $B$ must be separated by the statement proved in Exercise 3.4.5. It follows that $F$ is totally disconnected. \\
+
+(c) Is it possible to know whether $F$ is perfect? If not, can we modify this
+construction to produce a nonempty perfect set of irrational numbers? \\
+
+I was unsure of how to answer this question. My answer would be no, since in order for any infinite set of irrational numbers to be closed, it must contain some rational point. However, multiple answers I have found online state otherwise. 
+
+\end{document}
