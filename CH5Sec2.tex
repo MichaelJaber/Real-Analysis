@@ -1,0 +1,176 @@
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[mathscr]{euscript}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+
+\newcommand{\C}{\textbf{C}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\F}{\textbf{F}}
+\newcommand{\N}{\textbf{N}}
+\newcommand{\R}{\textbf{R}}
+\newcommand{\Q}{\textbf{Q}}
+
+
+\begin{document}
+
+Our studies of analysis have finally brought us to one of the more celebrated results of most calculus sequences, the derivative. The derivative should by now be familiar territory to us. However, from the perspective of continuity, there are various questions to ask. Does continuity imply that the function is differentiable? Does differentiability imply continuity? Do derivatives have similar properties to continuous functions when applied to compact domains? In this chapter, we hope to answer some if not all of these questions. Without further delay, we can begin our discussion of the derivative. \\
+
+We should all be familiar with the geometric interpretation of a derivative. Given some point on a continuous curve, the derivative at the point is the slope of the line tangent to the curve, meeting the curve at said point. While this is a fine way to think about derivatives, I hope to offer a different way of viewing them. Just last chapter we made connections about how continuous functions preserve certain properties of their domain, such as compactness and the completeness axiom in the form of the Intermediate Value Theorem. The derivative can be viewed in a similar light in the sense that the derivative gives us an idea of how much the function is changing relative to the point at which we are taking the derivative. The derivative gives a correspondence between the change in the range and the change in the domain. \\
+
+\textbf{Definition} Let $g: A \to \mathbb{R}$ be a function defined on an interval $A$. Given $c \in A$, the \textit{derivative of $g$ at c} is defined by 
+
+$$
+g '(c) = \lim_{x \to c} \frac{g(x) - g(c)}{x - c} , 
+$$
+
+provided this limit exists. If $g'$ exists for all points $c \in A$, we say that \textit{g is differentiable on $A$}. \\
+
+\textbf{Theorem} If $g: A \to \mathbb{R}$ is differentiable at $c \in A$, then $g$ is continuous at $c$. \\
+
+This follows from the algebraic limit theorems. Since the derivative exists, we have
+
+$$
+\lim_{x \to c} g(x) - g(x) = \lim_{x \to c} \frac{g(x) - g(c)}{x - c} (x-c) = g'(c) \cdot 0 = 0
+$$
+
+which implies that regardless of the sequence that we take, as long as the sequence converges to $c$, the difference between $g(x) - g(c)$ converges to 0. By our sequential definition for continuity, we have that $g$ is continuous at $c$. \\
+
+This should not be too surprising too us considering that in order to take a derivative of some point on a curve, then the function must be continuous at that point in order to guarantee that whenever a sequence in the preimage converges to some $c$, the corresponding sequence in the image converges to $f(c)$. \\
+
+\textbf{ Combinations of Differentiable Functions } \textit{Let $f$ and $g$ be functions defined on an interval $A$, and assume
+both are differentiable at some point $c \in A$. Then,}
+\begin{enumerate}[label=(\roman*)]
+\itemsep -0.2em
+\item $\begin{aligned}[t]
+    (f + g)'(c) = f'(c) + g'(c)
+\end{aligned}$
+\item $\begin{aligned}[t]
+    (kf)'(c) = kf'(c)
+\end{aligned}$
+\item $\begin{aligned}[t]
+   (fg)'(c) = f(c)g'(c) + f'(c)g(c)
+\end{aligned}$
+\item $\begin{aligned}[t]
+   (f/g)'(c) = \frac{g(c)f'(c) - g'(c)f(c)}{g(c)^2}
+\end{aligned}$
+\end{enumerate}
+
+Parts (i) and (ii) follow very easily from the definition of a derivative. As for part (iii), we have
+
+\begin{align*}
+    (fg)'(c) &= \lim_{x \to c} \frac{f(x)g(x) - f(c)g(c)}{x-c} \\
+    &= \lim_{x \to c} \frac{f(x)g(x) - f(x)g(c) + f(x)g(c) - f(c)g(c)}{x-c} \\
+    &= \lim_{x \to c} f(x)\frac{g(x)-g(c)}{x-c} + g(c)\frac{f(x)-f(c)}{x-c} \\
+    &= f(c)g'(c) + g(c) f'(c)
+\end{align*}
+
+as desired. As for part (iv), if we can find the derivative for the function $1/g(x)$, we can simply apply (iii). When trying to differentiate $1/g(x)$, however, we run into an issue. We do not yet have a rule for differentiating the composition of functions, in this case $f(x) = 1/x$, and $f(g(x)) = 1/g(x)$. This leads us to the next theorem. \\
+
+\textbf{Chain Rule} \textit{ Let $f : A \to \mathbb{R}$ and $g : B \to \mathbb{R}$ satisfy $f(A) \subseteq
+B$ so that the composition $g \circ f$ is well-defined. If $f$ is differentiable at $c \in A$
+and if $g$ is differentiable at $f(c) \in B$, then $g \circ f$ is differentiable at $c$ with $(g \circ f)'(c) = g'(f(c)) \cdot f'(c)$.} \\
+
+Since $g(x)$ is differentiable at $f(c)$, we have 
+
+$$
+g'(f(c)) = \lim_{y \to f(c)} \frac{g(y) - g(f(c))}{y - f(c)}
+$$
+
+We may be tempted to proceed as we did in the proof that points where the derivative is defined are continuous, but we cannot be sure that $y - f(c)$ does not equal zero for all values in the approaching neighborhoods. Instead, we define a new function $d(y)$ such that 
+
+$$
+    d(y) = \frac{g(y) - g(f(c))}{y - f(c)} - g'(f(c))
+$$
+
+Additionally, in order to guarantee $d(y)$ is continuous, let us define $d(f(c)) = 0$. Now, we have 
+
+$$
+    g(y) - g(f(c)) = (g'(f(c)) + d(y))(y - f(c))
+$$
+
+At this point, the above equality is defined for all $y \in B$. Because of this, we can parameterize $y$ to be $y = f(t)$. With this, as well as dividing both sides of the equality by $x-t$ gives us
+
+\begin{align*}
+    \lim_{t \to c} \frac{g(f(t)) - g(f(c))}{t-c} &= \lim_{t \to c} (g'(f(c)) + d(f(t)))\frac{(f(t) - f(c))}{t-c} \\
+    &= (g'(f(c)) + 0) f'(c) \\ 
+    &= g'(f(c)) \cdot f'(c)
+\end{align*}
+
+From this, using the Algebraic Limit Theorems, one can prove part (iv) very easily using the argument outlined above. \newpage
+
+\textbf{Interior Extremum Theorem} Let $f$ be differentiable on
+an open interval $(a, b)$. If $f$ attains a maximum value at some point $c \in (a, b)$
+(i.e., $f(c) \geq f(x)$ for all $x \in (a, b)$), then $f'(c) = 0$. The same is true if $f(c)$ is
+a minimum value. \\
+
+Before we embark on the proof of the theorem, let us take note of its implications. The Interior Extremum Theorem tells us that we can tell if a point on a continuous function is an extremum or not, simply by taking the derivative. Such a short theorem gives rise to the huge field of continuous optimization. \\
+
+Since we have that $f(c) \geq f(x)$ for all $x \in (a, b)$, we can construct two sequences $\{x_n\}$ and $\{y_n\}$ that approach $c$ from the left and right respectively. More concretely, we will construct the sequences such that $x_n < c$ and $y_n > c$ for all $n \in \mathbb{N}$ and $\lim x_n = \lim y_n = f(c)$. Since the function $f$ is differentiable on the open interval, by a theorem we proved earlier $f$ is continuous. Because $f$ is continuous, we know that such sequences exist. Thus, we have
+
+$$
+    f'(c) = \lim_{n \to \infty} \frac{f(y_n) - f(c)}{y_n - c} \leq 0
+$$
+
+because the value in the numerator is always less than zero, and the value in the denominator is always greater than zero. The entire quotient, then, is always less than or equal to zero, and by the Order Limit Theorem we have the above inequality. Similarly, we have
+
+$$
+    f'(c) = \lim_{n \to \infty} \frac{f(x_n) - f(c)}{x_n - c} \geq 0
+$$
+
+The only value for $f'(c)$ that satisfies the above inequalities is when $f'(c) = 0$, and the theorem is proven. As for the case where $f(c)$ is a minimum, the argument is the same, except for the fact that the inequality is switched for both of the sequences. \\
+ 
+We will find that there are many other properties we can determine about the function $f$ and its derivative $f'$ based on properties of the other. \newpage
+
+\textbf{ Darboux's Theorem } \textit{If f is differentiable on an interval
+$[a, b]$, and if $\alpha$ satisfies $f'(\alpha) < \alpha < f'(b)$ ( or $f'(\alpha) > \alpha > f'(b)$), then there exists a point $c \in (a, b)$ where $f'(c) = \alpha$.} \\
+
+Almost immediately, this theorem should remind us of the Intermediate Value Theorem from last chapter. Effectively, what we are saying is that if $f$ is differentiable on some open interval $[a, b]$, then $f'$ has the intermediate value property. \\
+
+. Let us define some new function $g(x) = f(x) - \alpha x$. By our combination of differentiable functions theorem above, we have $g'(x) = f'(x) - \alpha$. Since $g$ is defined over some closed interval $[a, b]$, $g$ attains some maximum value $g(c)$ where $c \in [a, b]$. With the given inequalities above we have 
+
+$$
+    g'(a) < 0 < g'(b)
+$$
+
+Since neither $g'(a)$ or $g'(b)$ are equal to zero, by the Interior Extremum Theorem, the maximum value of $g$ must occur at some $c \in (a, b)$. Since $g'(c) = 0$, we have $f'(c) = \alpha$ as desired. \\
+
+Upon surveying the exercises for this section, I found an exercise that I thought was worth including. \\
+
+\textbf{ Exercise 5.2.3.} By imitating the Dirichlet constructions in Section 4.1, construct
+a function on \textbf{R} that is differentiable at a single point. \\
+
+Consider the function 
+\[
+ f(x) =
+  \begin{cases}
+                                   x & \text{if $x \in \textbf{Q}$} \\
+                                   0 & \text{if $x \not \in \textbf{Q}$} \\
+
+  \end{cases}
+\]
+
+Firstly, this function not continuous at any $x \neq 0$. This follows from the fact that $\textbf{Q}$ is dense in \textbf{R}. As for when $x = 0$, if we set $\delta = \epsilon$, when whenever $| x | < \delta$, then $|f(x)| < \epsilon$. Thus, $f(x)$ is continuous only at $x = 0$. However, we see that $f(x)$ is not differentiable at $x = 0$. Let $x_n$ be a sequence of rational numbers such that $\lim x_n = 0$, and let $\{y_n\}$ be a sequence of irrational numbers such that $\lim y_n = 0$. If you compute the derivative of $f$ using both sequences, you will find that they are not equal. Thus, our construction is not quite correct. It seems that since the derivative of the function $g(x) = x$ is 1 at zero, this construction does not work. However, if we were to use a function whose derivative was 0 at zero, the construction may suffice. \\
+
+Consider the function 
+
+\[
+ f(x) =
+  \begin{cases}
+                                   x^2 & \text{if $x \in \textbf{Q}$} \\
+                                   0 & \text{if $x \not \in \textbf{Q}$} \\
+
+  \end{cases}
+\]
+
+The proof that this function is discontinuous at all $x \neq 0$ is practically the same as before. As for proving continuity of $f$ at $x = 0$, setting $\delta = \sqrt{\epsilon}$ should suffice. The difference here, however, is if we take the same sequences $x_n$ and $y_n$ as before, we find that the derivative of $x$ is always $0$, so our construction suffices. 
+
+\end{document}
